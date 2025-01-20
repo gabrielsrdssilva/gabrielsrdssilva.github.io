@@ -2,6 +2,7 @@
 layout: post
 title: "Interesting technics to network security audit"
 date: 2025-01-09
+tag: research
 ---
 
 ## Table of Contents
@@ -9,6 +10,7 @@ date: 2025-01-09
 2. [Banner Grabbing](#banner-grabbing)
 3. [Anonymous Login](#anonymous-login)
 4. [Pivoting](#pivoting)
+5. [Conclusion](#concluison)
 
 ## Introduction
 A computer network security audit is a crucial aspect of protecting sensitive data and information, aiming at the integrity of an organization's systems. With the increase in cyber threats, performing security audits has become an indispensable practice for administrators to identify vulnerabilities and strengthen defense against cyber attacks. In this article, we will explore three interesting computer network security audit techniques that can be used to assess and improve the security of a digital environment.
@@ -20,7 +22,7 @@ Banner grabbing is a technique for obtaining information about the states of por
 for i in $(seq 1 100); do nc 10.129.1.14 $i -zv; done
 ```
 
-![Output of netcat one-liner in bash]({{ site.baseurl }}/assets/img/ftp_exploit_vuln.jpg)
+![Output of netcat one-liner in bash]({{ site.baseurl }}/assets/img/searchsploit_ftp_exploit_vuln.jpg)
 
 **NOTE**: When you specify the `-z` parameter for netcat, the tool will enable TCP/IP port scanning mode. In this mode, netcat will not establish a full connection with the host, but will only check whether the port is open or closed.
 
@@ -46,7 +48,7 @@ smbclient //host_ip_address/samba_share -U guest # for linux
 net use Z: \\host_ip_address\samba_share /user:guest "" # for windows
 ```
 
-![SMB anonymous login example on linux]({{ site.baseurl }}/assets/img/smb_anonymous_login.png)
+![SMB anonymous login example on linux]({{ site.baseurl }}/assets/img/smbclient_smb_test_anonymous.png)
 
 **NOTE**: When you provide the username, no password is entered for the login prompt that follows. This is the default for any type of anonymous authentication.
 
@@ -69,8 +71,8 @@ ssh -L 8080:localhost:80 user@target_host
 - What happens here is that port 8080 on the local machine (where the command is executed) is mapped to port 80 of the localhost address (127.0.0.1) through the target_host.
 - This means that, when you access http://localhost:8080, you will actually be accessing the service that is running on port 80 of the target_host address (using he as an intermediary).
 
-![stablish conection with ssh port]({{ site.baseurl }}/assets/img/ssh_local_pivoting.jpg)
-![pivoting on http port]({{ site.baseurl }}/assets/img/http_local_pivoting.jpg)
+![stablish conection with ssh port]({{ site.baseurl }}/assets/img/open_ssh_local_pivoting.jpg)
+![pivoting on http port]({{ site.baseurl }}/assets/img/linux_http_local_pivoting.jpg)
 
 **How is it performed??**
 
